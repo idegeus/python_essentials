@@ -1,0 +1,19 @@
+#State to move east
+0 ***x -> S 1
+0 *x*S -> E 0
+0 *E*S -> X 3
+
+#state to move south
+1 **x* -> W 2
+1 **Wx -> S 1
+1 **WS -> X 0
+
+#state to move west
+2 x*** -> N 3
+2 N*x* -> W 2
+2 N*W* -> X 1
+
+#State to move up
+3 *x** -> E 0
+3 xE** -> N 3
+3 NE** -> X 2

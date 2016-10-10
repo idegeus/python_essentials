@@ -1,0 +1,15 @@
+#initial state
+0 *x** -> E 0
+0 *E** -> N 1
+
+# state 0 with nothing N: go one step N
+1 x*** -> N 1
+
+# state 0 with something to the N: go W + into st 2
+1 N*** -> X 2
+
+# state 1 with nothing to the S: go one step S
+2 ***x -> S 2
+
+# state 1 with something to the S: stay put + into state 1
+2 ***S -> W 1

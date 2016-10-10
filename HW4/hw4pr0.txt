@@ -1,0 +1,11 @@
+What is an application that (in your opinion) Watson’s
+technology might be able to contribute to? Alternatively,
+do you feel Watson’s capabilities will not make much of an
+impact? You can look around for web articles on this,
+or you’re welcome to speculate.
+
+I think Watson's technology will come in most handy, in situations
+where large amounts of data have to be processed. Think about medical
+diagnosis, weather data simulation, NSA surveillance. This is
+a situation where a computer that can process large quantities of data
+very quickly can outperform humans.

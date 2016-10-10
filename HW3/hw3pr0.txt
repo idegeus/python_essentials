@@ -1,0 +1,14 @@
+#Name: Ivo de Geus
+
+The article states that, whether in science or business,
+we “don’t have to settle for models at all.” Do you agree
+ or disagree with this statement? How? And why? Certainly
+ feel free to articulate a more nuanced or hybrid view, if you’d like.
+
+
+Ik vind dat de meeste concepten in de wereld beter te beschrijven zijn, wanneer
+ze concreet zijn, maar modellen zijn bijna per definitie abstract. Dit maakt
+het lastig voor mensen om ze te begrijpen, maar is cruciaal voor computers. Aangezien
+zij geen context kunnen bepalen, is het nodig dat ze een vaste omgeving hebben, een
+model om zich in te orienteren. Dus ik ben het gedeeltelijk eens, voor normale
+situaties in mensenlevens niet. Maar voor computeromgevingen wel.

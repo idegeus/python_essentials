@@ -1,0 +1,10 @@
+The most difficult exercise was the labyrinth map, in picobot. The syntax of
+picobot especially was difficult fo figure out, since it has no real way to
+set a variable. While you are able to set a state, the program will only execute
+one rule per step.
+
+Python is quite different in that way, it seems more like natural languages.
+You can set variables, execute functions when needed, and seems much more
+flexible than Picobot. One side-note is needed, I have programmed in
+languages which felt like Python before, so it might actually have handicapped
+me in my thinking in this excercise.

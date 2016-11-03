@@ -5,6 +5,7 @@ import string
 VOWELS = 'aeiou'
 CONSONANTS = 'bcdfghjklmnpqrstvwxyz'
 HAND_SIZE = 7
+word_list = []
 
 SCRABBLE_LETTER_VALUES = { 'a': 1, 'b': 3, 'c': 3, 'd': 2, 'e': 1, 'f': 4, 'g': 2,
     'h': 4, 'i': 1, 'j': 8, 'k': 5, 'l': 1, 'm': 3, 'n': 1, 'o': 1, 'p': 3, 'q': 10,
@@ -53,10 +54,11 @@ def display_hand(hand):
 
     hand: dictionary (string -> int)
     """
+    wrd = ''
     for letter, frequency in hand.items():
         for _ in range(frequency):
-             print letter,              # print all on the same line
-    print                               # print an empty line
+             wrd += (letter + ' ')
+    return wrd
 
 # -----------------------------------
 
@@ -73,9 +75,10 @@ def load_words():
 
     return: list of strings
     """
-    words_file = open('words.txt')
-    for line in words_file:
-        print line.lower().rstrip()
+    words_file = open(WORDLIST_FILENAME)
+    return [line.lower().rstrip() for line in words_file]
+
+
 
 #
 # Problem #1: Scoring a word
@@ -97,11 +100,15 @@ def get_word_score(word, n):
     """
     score = 0
     for i in range(len(word)):
-        score += SCRABBLE_LETTER_VALUES[word[i]]
+        try:
+            score += SCRABBLE_LETTER_VALUES[word[i]]
+        except:
+            score += 0
     score *= len(word)
     if len(word) == n:
         score += 50
     return score
+
 
 #
 # Problem #2: Update a hand by removing letters
@@ -122,10 +129,18 @@ def update_hand(hand, word):
     hand: dictionary (string -> int)    
     returns: dictionary (string -> int)
     """
-    return hand
+    nhand = hand.copy()
+    for wordkey in range(len(word)):
+        for handkey in nhand.keys():
+            if(word[wordkey] == handkey):
+                if nhand[handkey] > 1:
+                    nhand[handkey] = nhand[handkey] - 1
+                else:
+                    del nhand[handkey]
+                    break
+    return nhand
 
-print update_hand({'a':1, 'q':1, 'l':2, 'm':1, 'u':1, 'i':1}, 'quail')
-exit()
+
 #
 # Problem #3: Test word validity
 #
@@ -138,7 +153,13 @@ def get_frequency_dict(word):
     word: string
     return: dictionary
     """
-    # TO DO...
+    dict = {}
+    for i in range(len(word)):
+        if word[i] in dict:
+            dict[word[i]] += 1
+        else:
+            dict[word[i]] = 1
+    return dict
 
 def is_valid_word(word, hand, word_list):
     """
@@ -150,7 +171,19 @@ def is_valid_word(word, hand, word_list):
     hand: dictionary (string -> int)
     word_list: list of lowercase strings
     """
-    # TO DO...
+
+    word_dict = get_frequency_dict(word)
+    hand_dict = hand
+
+    if word in word_list:
+        for n in range(len(word)):
+            if word_dict[n] in hand_dict:
+                hand_dict[n] -= 1
+            else:
+                return False
+        return True
+    else:
+        return False
 
 
 #
@@ -164,9 +197,12 @@ def hand_length(hand):
     hand: dictionary (string -> int)    
     returns: int
     """
-    # TO DO...
+    som = 0
+    for n in hand.keys():
+        som += hand[n]
+    return som
 
-def play_hand(hand, words):
+def play_hand(hand, word_list):
     """
     Allows the user to play the given hand, as follows:
 
@@ -186,17 +222,31 @@ def play_hand(hand, words):
     hand: dictionary (string -> int)
     words: list of lowercase strings
     """
-    # TO DO ...
-
+    hand_score = 0
+    while hand_length(hand) > 0:
+        print "CurrentHand: " + str(display_hand(hand))
+        new = raw_input("Enter word, or a '.' to indicate that you are finished: ")
+        if new == '.':
+            break
+        elif new not in word_list:
+            print "Your input is not a valid english word. Please try again."
+        #TODO: Enter check for frequency decrepencies here
+        else:
+            hand_score += get_word_score(new, hand_length(hand))
+            hand = update_hand(hand, new)
+            print "Total score: " + str(hand_score) + " points."
+        print
+    print "Ending this hand with a total score of " + str(hand_score) + " points."
+    return hand_score
 
 #
 # Problem #5: Playing a game
 # Make sure you understand how this code works!
 # 
-def play_game(words):
+def play_game(word_list):
     """
     Allow the user to play an arbitrary number of hands.
-    
+
     * Asks the user to input 'n' or 'r' or 'e'.
     * If the user inputs 'n', let the user play a new (random) hand.
       When done playing the hand, ask the 'n' or 'e' question again.
@@ -204,13 +254,28 @@ def play_game(words):
     * If the user inputs 'e', exit the game.
     * If the user inputs anything else, ask them again.
     """
-    # TO DO...
+
+    random_hand = deal_hand(HAND_SIZE)
+    while True:
+        choice = raw_input("Please choose between n, r or e:")
+        if choice == 'n':
+            print "Starting new random hand"
+            random_hand = deal_hand(HAND_SIZE)
+            play_hand(random_hand, word_list)
+        elif choice == 'r':
+            print "Replaying last hand!"
+            play_hand(random_hand, word_list)
+        elif choice == 'e':
+            print "Exiting wordgames, thank you for playing!"
+            break
+        else:
+            print "This is not a valid choice, please try again."
 
 
 #
 # Build data structures used for entire session and play game
 #
 if __name__ == '__main__':
-    words = load_words()
-    play_game(words)
+    word_list = load_words()
+    play_game(word_list)
 

@@ -1,0 +1,15 @@
+The earthquakes article raises the question,
+How can we know if your computer program/model
+is ‘right’? Based on the information in that article,
+how do you think computer scientists/scientists/mathematicians/engineers
+can ensure that their (our) models are correct? Can we at all?
+
+I think we are able to make a distinction between computer program and
+models. Models are meant to represent the real world, and are an abstraction.
+They should be as close to real as possible. These are by definition leaving
+some details behind, and will never be correct in taking all the variables.
+Computer programs are a different story altogether though. When we build them,
+they are created with only the knowledge of the programmer in mind, and will always
+be correct in the way that the programmer made them.
+
+//Ivo de Geus 1125 1190
